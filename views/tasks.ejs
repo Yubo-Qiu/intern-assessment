@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tasks</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tasks</h1>
+  <p>Navigate to <a href="/">Home</a>.</p>
+  <p>
+    <a href="/tasks">All Tasks</a> |
+    <a href="/tasks/pending">Pending Tasks</a> |
+    <a href="/tasks/completed">Completed Tasks</a>
+  </p>
+  <form action="/tasks" method="POST">
+    <label for="title">Task Title:</label>
+    <input type="text" id="title" name="title" required>
+    <label for="description">Description:</label>
+    <textarea id="description" name="description"></textarea>
+    <button type="submit">Add Task</button>
+  </form>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% tasks.forEach(task => { %>
+        <tr>
+          <td><%= task.id %></td>
+          <td><%= task.title %></td>
+          <td><%= task.status %></td>
+          <td><a href="/tasks/<%= task.id %>">View Details</a></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>

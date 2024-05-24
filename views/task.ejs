@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Details</title>
+</head>
+<body>
+  <h1>Task Details</h1>
+  <p><strong>ID:</strong> <%= task.id %></p>
+  <p><strong>Title:</strong> <%= task.title %></p>
+  <p><strong>Status:</strong> <%= task.status %></p>
+  <p><strong>Description:</strong> <%= task.description %></p>
+  <p><a href="/tasks">Back to Tasks</a></p>
+
+  <h2>Edit Task</h2>
+  <form action="/tasks/<%= task.id %>?_method=PUT" method="POST">
+    <label for="title">Task Title:</label>
+    <input type="text" id="title" name="title" value="<%= task.title %>" required>
+    <br>
+    <br>
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" required><%= task.description %></textarea>
+    <br>
+    <br>
+    <button type="submit">Update Task</button>
+  </form>
+
+  <h2>Change Task Status or Delete Task</h2>
+  <form action="/tasks/<%= task.id %>?_method=DELETE" method="POST" style="display:inline;">
+    <button type="submit">Delete Task</button>
+  </form>
+
+  <form action="/tasks/<%= task.id %>/toggle?_method=PUT" method="POST" style="display:inline;">
+    <button type="submit"><%= task.status === "pending" ? "Mark as Completed" : "Mark as Pending" %></button>
+  </form>
+</body>
+</html>
